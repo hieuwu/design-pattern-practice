@@ -6,6 +6,7 @@ Practice notes for problems and solutions learned from Head First Design Pattern
 
 
 **Get started:** Write a program to display a Duck and other kinds of duck. Basic action that a duck can perform is swim, quack and display
+
 **Naive approach:** Use OO basics like Inheritance, create a Duck then other kinds of duck inherits attributes, method and override it if needed.
 
 The class diagram looks like:
