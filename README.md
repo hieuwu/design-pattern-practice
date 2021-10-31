@@ -35,6 +35,23 @@ The class diagram looks like:
 - **The Strategy Pattern** defines a family of algorithms,encapsulates each one, and makes them interchangeable.Strategy lets the algorithm vary independently from clients that use it
 
 # Observer Pattern:
+**Get started:** 
+
+**Naive approach:** 
+
+The class diagram looks like:
+
+**What if ..? :**
+**Another approach:**
+
+**Efficient approach:**
+
+- Our final result:
+
+
+**Conclusion:**
+- **The Observer Pattern** 
+
 
 
 # Decorator Pattern:
@@ -53,9 +70,40 @@ The class diagram looks like:
 **Another approach:** 
 
 # Factory Pattern:
+**Get started:** 
+
+**Naive approach:** 
+
+The class diagram looks like:
+
+**What if ..? :**
+**Another approach:**
+
+**Efficient approach:**
+
+- Our final result:
+
+
+**Conclusion:**
+- **The Factory Pattern** 
 
 # Builder Pattern:
+**Get started:** 
 
+**Naive approach:** 
+
+The class diagram looks like:
+
+**What if ..? :**
+**Another approach:**
+
+**Efficient approach:**
+
+- Our final result:
+
+
+**Conclusion:**
+- **The Builder Pattern** 
 
 
 
