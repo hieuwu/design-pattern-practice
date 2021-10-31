@@ -35,6 +35,9 @@ The class diagram looks like:
 - **The Strategy Pattern** defines a family of algorithms,encapsulates each one, and makes them interchangeable.Strategy lets the algorithm vary independently from clients that use it
 
 # Observer Pattern:
+
+
+# Decorator Pattern:
 **Get started:** Write a program to for a coffee shop to create order with many beverages, of course, many toppings and other properties.
 
 **Naive approach:** Create an abstract class called Beverage, and other kind will extends this class. Then just override methods like cost() to calculate the price for each kind of beverage.
@@ -48,8 +51,6 @@ The class diagram looks like:
 - We calculate the price for each beverage, with different condiments, size
 
 **Another approach:** 
-
-# Decorator Pattern:
 
 # Factory Pattern:
 
