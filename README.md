@@ -36,6 +36,13 @@ The class diagram looks like:
 
 # Observer Pattern:
 
+# Decorator Pattern:
+
+# Factory Pattern:
+
+# Builder Pattern:
+
+
 
 
 
