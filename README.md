@@ -68,6 +68,9 @@ The class diagram looks like:
 - We calculate the price for each beverage, with different condiments, size
 
 **Another approach:** 
+- Put all the condiments inside the abstract Beverage class, then for each subclass, we have to override all the checking condiments method as below. This is still not a good approach
+
+**Efficient approach:**
 
 # Factory Pattern:
 **Get started:** 
