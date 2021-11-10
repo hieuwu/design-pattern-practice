@@ -73,6 +73,9 @@ The class diagram looks like:
 **Efficient approach:**
 
 # Factory Pattern:
+- Simple Factory
+- Factory Method
+- Abstract Factory
 **Get started:** 
 
 **Naive approach:** 
