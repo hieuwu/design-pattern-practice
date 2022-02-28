@@ -4,7 +4,6 @@ Practice notes for problems and solutions learned from Head First Design Pattern
 
 # Strategy Pattern:
 
-
 **Get started:** Write a program to display a Duck and other kinds of duck. Basic action that a duck can perform is swim, quack and display
 
 **Naive approach:** Use OO basics like Inheritance, create a Duck then other kinds of duck inherits attributes, method and override it if needed.
@@ -158,30 +157,169 @@ classDiagram
 
 ```
 
-<!-- [![](https://mermaid.ink/img/eyJjb2RlIjoiY2xhc3NEaWFncmFtXG4gICAgRHVjayA8fC0tIFJ1YmJlckR1Y2tcbiAgICBEdWNrIDx8LS0gTWFsbGFyZER1Y2tcbiAgICBEdWNrIDx8LS0gUmVkaGVhZER1Y2tcblxuICAgIGNsYXNzIER1Y2t7XG4gICAgICAgIC1GbHlCZWhhdmlvciBmbHlCZWhhdmlvclxuICAgICAgICAtUXVhY2tCZWhhdmlvciBxdWFja0JlaGF2aW9yXG4gICAgICArc3dpbSgpXG4gICAgICArcXVhY2soKVxuICAgICAgK2Rpc3BsYXkoKVxuICAgICAgK3NldEZseUJlaGF2aW9yKClcbiAgICAgICtzZXRRdWFja0JlaGF2aW9yKClcbiAgICB9XG4gICAgY2xhc3MgUnViYmVyRHVja3tcbiAgICAgICAgK2Rpc3BsYXkoKVxuICAgIH1cbiAgICBjbGFzcyBNYWxsYXJkRHVja3tcbiAgICAgICAgK2Rpc3BsYXkoKVxuICAgICAgICArcXVhY2soKVxuICAgIH1cbiAgICBjbGFzcyBSZWRoZWFkRHVja3tcbiAgICAgICAgK2Rpc3BsYXkoKVxuICAgICAgICArZmx5KClcbiAgICAgICAgK3F1YWNrKClcbiAgICB9XG5cblxuICAgIEZseUJlaGF2aW9yIDwuLiBGbHlXaXRoV2luZ3NcbiAgICBGbHlCZWhhdmlvciA8Li4gRmx5Tm9XYXlcblxuICAgIGNsYXNzIEZseUJlaGF2aW9ye1xuICAgICAgICA8PGludGVyZmFjZT4-XG4gICAgICAgICtmbHkoKVxuICAgIH1cblxuICAgIGNsYXNzIEZseVdpdGhXaW5nc3tcbiAgICAgICAgK2ZseSgpXG4gICAgfVxuXG4gICAgY2xhc3MgRmx5Tm9XYXl7XG4gICAgICAgICtmbHkoKVxuICAgIH1cblxuICAgIFxuICAgIFF1YWNrQmVoYXZpb3IgPC4uIFF1YWNrXG4gICAgUXVhY2tCZWhhdmlvciA8Li4gU3F1ZWFrXG5cbiAgICBjbGFzcyBRdWFja0JlaGF2aW9ye1xuICAgICAgICA8PGludGVyZmFjZT4-XG4gICAgICAgICtmbHkoKVxuICAgIH1cblxuICAgIGNsYXNzIFF1YWNre1xuICAgICAgICArcXVhY2soKVxuICAgIH1cblxuICAgIGNsYXNzIFNxdWVha3tcbiAgICAgICAgK3F1YWNrKClcbiAgICB9IiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/edit/#eyJjb2RlIjoiY2xhc3NEaWFncmFtXG4gICAgRHVjayA8fC0tIFJ1YmJlckR1Y2tcbiAgICBEdWNrIDx8LS0gTWFsbGFyZER1Y2tcbiAgICBEdWNrIDx8LS0gUmVkaGVhZER1Y2tcblxuICAgIGNsYXNzIER1Y2t7XG4gICAgICAgIC1GbHlCZWhhdmlvciBmbHlCZWhhdmlvclxuICAgICAgICAtUXVhY2tCZWhhdmlvciBxdWFja0JlaGF2aW9yXG4gICAgICArc3dpbSgpXG4gICAgICArcXVhY2soKVxuICAgICAgK2Rpc3BsYXkoKVxuICAgICAgK3NldEZseUJlaGF2aW9yKClcbiAgICAgICtzZXRRdWFja0JlaGF2aW9yKClcbiAgICB9XG4gICAgY2xhc3MgUnViYmVyRHVja3tcbiAgICAgICAgK2Rpc3BsYXkoKVxuICAgIH1cbiAgICBjbGFzcyBNYWxsYXJkRHVja3tcbiAgICAgICAgK2Rpc3BsYXkoKVxuICAgICAgICArcXVhY2soKVxuICAgIH1cbiAgICBjbGFzcyBSZWRoZWFkRHVja3tcbiAgICAgICAgK2Rpc3BsYXkoKVxuICAgICAgICArZmx5KClcbiAgICAgICAgK3F1YWNrKClcbiAgICB9XG5cblxuICAgIEZseUJlaGF2aW9yIDwuLiBGbHlXaXRoV2luZ3NcbiAgICBGbHlCZWhhdmlvciA8Li4gRmx5Tm9XYXlcblxuICAgIGNsYXNzIEZseUJlaGF2aW9ye1xuICAgICAgICA8PGludGVyZmFjZT4-XG4gICAgICAgICtmbHkoKVxuICAgIH1cblxuICAgIGNsYXNzIEZseVdpdGhXaW5nc3tcbiAgICAgICAgK2ZseSgpXG4gICAgfVxuXG4gICAgY2xhc3MgRmx5Tm9XYXl7XG4gICAgICAgICtmbHkoKVxuICAgIH1cblxuICAgIFxuICAgIFF1YWNrQmVoYXZpb3IgPC4uIFF1YWNrXG4gICAgUXVhY2tCZWhhdmlvciA8Li4gU3F1ZWFrXG5cbiAgICBjbGFzcyBRdWFja0JlaGF2aW9ye1xuICAgICAgICA8PGludGVyZmFjZT4-XG4gICAgICAgICtmbHkoKVxuICAgIH1cblxuICAgIGNsYXNzIFF1YWNre1xuICAgICAgICArcXVhY2soKVxuICAgIH1cblxuICAgIGNsYXNzIFNxdWVha3tcbiAgICAgICAgK3F1YWNrKClcbiAgICB9IiwibWVybWFpZCI6IntcbiAgXCJ0aGVtZVwiOiBcImRlZmF1bHRcIlxufSIsInVwZGF0ZUVkaXRvciI6ZmFsc2UsImF1dG9TeW5jIjp0cnVlLCJ1cGRhdGVEaWFncmFtIjpmYWxzZX0) -->
 
 **Conclusion:**
 - **The Strategy Pattern** defines a family of algorithms,encapsulates each one, and makes them interchangeable.Strategy lets the algorithm vary independently from clients that use it
 
 # Observer Pattern:
-**Get started:** 
+**Get started:** Given that we need to write a Weather monitor application. In this application, we have to get data from a provider. The important thing is that, we need to notify to all users whenver the forecase measurement data is updated. And also we need to display it with in multiple forms.
 
-**Naive approach:** 
+**Naive approach:** So first of all, we need a class contains the data and some methods to get and display data to the user. The class would look like:
 
-The class diagram looks like:
+```mermaid
+classDiagram
 
-**What if ..? :**
-**Another approach:**
+    class WeatherData{
+        -CurrentConditionDisplay currentConditionDisplay
+        -StatisticsDisplay statisticsDisplay
+        -ForecastDisplay forecastDisplay
+      +getTemprature()
+      +getHumidity()
+      +getPressure()
+      +measurementsDataChanged()
+    }
+```
 
-**Efficient approach:**
+And our `measurementsDataChanged` method would look something like:
+
+```java
+public void measurementsDataChanged() {
+    float temp = getTemperature()
+    float humidity = getHumidity()
+    float pressure = getPressure()
+    
+    currentConditionDisplay.update(temp, humidity, pressure)
+    statisticsDisplay.update(temp, humidity, pressure)
+    forecastDisplay.update(temp, humidity, pressure)
+}
+```
+
+
+**What if ..? :** 
+- We need to add more display or remove one. Because the `measurementsDataChanged()` method is implemented in concrete way, we can not add or remove display withou making changes to the program
+
+**Efficient approach:** We use Observer Pattern for this case. In this pattern, we will have a `Subject` which is our `WeatherData` class, where we get data from. The next one is `Observers`, all the thing that consume the data which is our displays
+- First, we need to define all the interface needed for `Observers`, `Subjects` along with shared behavior of each observer:
+```mermaid
+classDiagram
+    class Subject{
+        <<interface>>
+        +registerObserver(Observer o)
+        +removeObserver(Observer o)
+        +notifyObservers()
+    }
+
+    class Observer{
+        <<interface>>
+        +update(float temp, float humidity, float pressure)
+    }
+
+    class DisplayElement{
+        <<interface>>
+        +display()
+    }
+
+```
+- Next, refactor our `WeatherData` class:
+```java
+public class WeatherData implements Subject {
+    private ArrayList observers;
+    private float temperature;
+    private float humidity;
+    private float pressure;
+    
+    public WeatherData() {
+        observers = new ArrayList();
+    }
+    
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+    
+    public void removeObserver(Observer o) {
+        int i = observers.indexOf(o);
+        if (i >= 0) {
+            observers.remove(i);
+        }
+    }
+    
+    public void notifyObservers() {
+        for (int i = 0; i < observers.size(); i++) {
+            Observer observer = (Observer) observers.get(i);
+            observer.update(temperature, humidity, pressure);
+        }
+    }
+    
+    public void measurementsChanged() {
+        notifyObservers();
+    }
+    public void setMeasurements(float temperature, float humidity, float pressure) {
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.pressure = pressure;
+        measurementsChanged();
+    }
+}
+```
+
 
 - Our final result:
 
+```mermaid
+classDiagram
+    WeatherData <|-- Subject
+    class WeatherData{
+        -CurrentConditionDisplay currentConditionDisplay
+        -StatisticsDisplay statisticsDisplay
+        -ForecastDisplay forecastDisplay
+      +getTemprature()
+      +getHumidity()
+      +getPressure()
+      +measurementsDataChanged()
+      +registerObserver(Observer o)
+      +removeObserver(Observer o)
+      +notifyObservers()
+    }
+    class Subject{
+        <<interface>>
+        +registerObserver(Observer o)
+        +removeObserver(Observer o)
+        +notifyObservers()
+    }
 
+    class Observer{
+        <<interface>>
+        +update(float temp, float humidity, float pressure)
+    }
+
+    class DisplayElement{
+        <<interface>>
+        +display()
+    }
+
+    CurrentConditionDisplay <|-- Observer
+    CurrentConditionDisplay <|-- DisplayElement
+    class CurrentConditionDisplay {
+       +update(float temp, float humidity, float pressure)
+       +display()
+    }
+
+    StatisticsDisplay <|-- Observer
+    StatisticsDisplay <|-- DisplayElement
+    class StatisticsDisplay {
+       +update(float temp, float humidity, float pressure)
+       +display()
+    }
+
+    ForecastDisplay <|-- Observer
+    ForecastDisplay <|-- DisplayElement
+    class ForecastDisplay {
+       +update(float temp, float humidity, float pressure)
+       +display()
+    }
+```
 **Conclusion:**
-- **The Observer Pattern** 
-
-
+- **The Observer Pattern** defines a one-to-many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically
 
 # Decorator Pattern:
 **Get started:** Write a program to for a coffee shop to create order with many beverages, of course, many toppings and other properties.
@@ -189,7 +327,6 @@ The class diagram looks like:
 **Naive approach:** Create an abstract class called Beverage, and other kind will extends this class. Then just override methods like cost() to calculate the price for each kind of beverage.
 
 The class diagram looks like:
-
 
 
 **What if ..? :**
