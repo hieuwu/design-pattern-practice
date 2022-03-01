@@ -322,22 +322,278 @@ classDiagram
 - **The Observer Pattern** defines a one-to-many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically
 
 # Decorator Pattern:
-**Get started:** Write a program to for a coffee shop to create order with many beverages, of course, many toppings and other properties.
+**Get started:** Write a program to for a coffee shop to create order with many beverages, of course, many toppings and other properties are added onto each beverage.
 
 **Naive approach:** Create an abstract class called Beverage, and other kind will extends this class. Then just override methods like cost() to calculate the price for each kind of beverage.
 
 The class diagram looks like:
+```mermaid
+classDiagram
+    class Beverage{
+        -String description
+      +getDescription()
+      +cost()
+    }
 
+    Beverage <|-- HouseBlend
+    class HouseBlend{
+      +cost()
+    }
+
+    Beverage <|-- DarkRoast
+    class DarkRoast{
+      +cost()
+    }
+
+    Beverage <|-- Decaf
+    class Decaf{
+      +cost()
+    }
+
+    
+    Beverage <|-- Espresso
+    class Espresso{
+      +cost()
+    }
+```
 
 **What if ..? :**
-- We want to add some condiments like milk, chocolate, then we just need to create more class for this kind of "new" beverage. Maybe for current Coffe, we would have new classes such as CoffeeWithMilk, CoffeeWithSoy,..uh oh Class Explosion
+- We want to add some condiments like milk, chocolate, then we just need to create more class for this kind of "new" beverage. Maybe for current Coffee type, we would have new classes such as CoffeeWithMilk, CoffeeWithSoy,..**uh oh Class Explosion**
 - We calculate the price for each beverage, with different condiments, size
 
 **Another approach:** 
 - Put all the condiments inside the abstract Beverage class, then for each subclass, we have to override all the checking condiments method as below. This is still not a good approach
 
-**Efficient approach:**
+```mermaid
+classDiagram
+    class Beverage{
+        -String description
+        -Condiment milk
+        -Condiment mocha
+        -Condiment soy
+        -Condiment whip
+      +getDescription()
+      +cost()
+      +hasMilk()
+      +setMilk()
+      +hasMocha()
+      +setMocha()
+      +hasWhip()
+      +setWhip()
+    }
 
+    Beverage <|-- HouseBlend
+    class HouseBlend{
+      +cost()
+    }
+
+    Beverage <|-- DarkRoast
+    class DarkRoast{
+      +cost()
+    }
+
+    Beverage <|-- Decaf
+    class Decaf{
+      +cost()
+    }
+
+    Beverage <|-- Espresso
+    class Espresso{
+      +cost()
+    }
+```
+- Our `cost()` method in `Beverage` class would look like:
+```java
+public double cost() {
+    double condimentCost = 0.0
+    if (hasMilk()) {
+        condimentCost += milk.getCost()
+    }
+    
+    if (hasMocha()) {
+        coondimentCost += mocha.getCost()
+    }
+    return condimentCost
+}
+```
+
+- OUr `cost()` method in concreate class lets say `DarkRoast` would loook like:
+
+```java
+public double cost() {
+    return 1.99 + super.cost()
+}
+```
+
+**Efficient approach:** WE will use the Decorator Pattern. The core concept of this pattern would look like:
+```mermaid
+classDiagram
+class Component{
+      +methodA()
+      +methodB()
+    }
+
+    Component <|-- ConcreteComponent
+    class ConcreteComponent{
+      +methodA()
+      +methodB()
+    }
+
+    Component <|-- Decorator
+    class Decorator{
+      +methodA()
+      +methodB()
+    }
+
+    Decorator <|-- ConcreteDecoratorA
+    class ConcreteDecoratorA{
+      +methodA()
+      +methodB()
+    }
+
+    Decorator <|-- ConcreteDecoratorB
+    class ConcreteDecoratorB{
+      +methodA()
+      +methodB()
+    }
+```
+- When we apply to our current design, it would look like:
+```mermaid
+classDiagram
+    class Beverage{
+        -String description
+      +cost()
+      +getDescription()
+    }
+
+    Beverage <|-- HouseBlend
+    class HouseBlend{
+      +cost()
+    }
+
+    Beverage <|-- Espresso
+    class Espresso{
+      +cost()
+    }
+
+    Beverage <|-- DarkRoast
+    class DarkRoast{
+      +cost()
+    }
+
+    Beverage <|-- CondimentDecorator
+    class CondimentDecorator{
+      +getDescription()
+    }
+
+    CondimentDecorator <|-- Milk
+    class Milk{
+        -Beverage beverage
+      +cost()
+      +getDescription()
+    }
+
+    CondimentDecorator <|-- Mocha
+    class Mocha{
+        -Beverage beverage
+      +cost()
+      +getDescription()
+    }
+
+    CondimentDecorator <|-- Soy
+    class Soy{
+        -Beverage beverage
+      +cost()
+      +getDescription()
+    }
+
+    CondimentDecorator <|-- Whip
+    class Whip{
+        -Beverage beverage
+      +cost()
+      +getDescription()
+    }
+```
+
+- Here is how we actually use this pattern in code:
+
+```java
+public abstract class Beverage {
+    String description = “Unknown Beverage”;
+    public String getDescription() {
+        return description;
+    }
+    public abstract double cost();
+}
+
+public abstract class CondimentDecorator extends Beverage {
+    public abstract String getDescription();
+}
+```
+- Our concrete beverages:
+```java
+public class Espresso extends Beverage {
+    public Espresso() {
+        description = “Espresso”;
+    }
+    public double cost() {
+        return 1.99;
+    }
+}
+```
+
+```java
+public class HouseBlend extends Beverage {
+    public HouseBlend() {
+        description = “House Blend Coffee”;
+    }
+    public double cost() {
+        return .89;
+    }
+}
+```
+- Our condiment decorator
+```java
+public class Mocha extends CondimentDecorator {
+    Beverage beverage;
+    public Mocha(Beverage beverage) {
+        this.beverage = beverage;
+    }
+    public String getDescription() {
+        return beverage.getDescription() + “, Mocha”;
+    }
+    public double cost() {
+        return .20 + beverage.cost();
+    }
+}
+```
+- And finally how we decorate objects in runtime:
+```java
+    public static void main(String args[]) {
+        Beverage beverage = new Espresso();
+        System.out.println(beverage.getDescription() +
+            “$” + beverage.cost());
+        Beverage beverage2 = new DarkRoast();
+        beverage2 = new Mocha(beverage2);
+        beverage2 = new Mocha(beverage2);
+        beverage2 = new Whip(beverage2);
+        System.out.println(beverage2.getDescription() +
+            “$” + beverage2.cost());
+        Beverage beverage3 = new HouseBlend();
+        beverage3 = new Soy(beverage3);
+        beverage3 = new Mocha(beverage3);
+        beverage3 = new Whip(beverage3);
+        System.out.println(beverage3.getDescription() +
+            “$” + beverage3.cost());
+    }
+```
+- The output looks like:
+
+```
+Espresso $1.99
+Dark Roast Coffee, Mocha, Mocha, Whip $1.49
+House Blend Coffee, Soy, Mocha, Whip $1.34
+```
 # Factory Pattern:
 - Simple Factory
 - Factory Method
