@@ -616,14 +616,129 @@ The class diagram looks like:
 - **The Factory Pattern** 
 
 # Builder Pattern:
-**Get started:** 
+**Get started:** Write a program to support a pizza shop make their order process mroe smooth. This program supports creating many types of Pizza and be able to customized based on branches.
 
-**Naive approach:** 
+
+**Naive approach:** As usual, we will come up with a `orderPizza` function like this, because to order a pizza, we need some mroe steps like prepare, bake, cut,... so we have:
+
+```java
+Pizza orderPizza(){
+    Pizza pizza = new Pizza();
+    
+    pizza.perpare();
+    pizza.bake();
+    pizze,cut();
+    pizza.box();
+    return pizza;
+}
+```
 
 The class diagram looks like:
 
 **What if ..? :**
+- We need to add more pizze types. Then our `orderPizza` becomes:
+```java
+Pizza orderPizza(String type){
+    Pizza pizza;
+    
+    if (type.equals("cheese") pizza = new CheesePizza();
+    else if (type.equals("geekl") pizza = new GeekPizza();
+    else if (type.equals("cheese") pizza = new CheesePizza();
+    else if (type.equals("clam") pizza = new ClamPizza();
+
+    pizza.perpare();
+    pizza.bake();
+    pizze,cut();
+    pizza.box();
+    return pizza;
+}
+```
+
+
 **Another approach:**
+- We can improve the code inside `orderPizza` function. AS you can see, we can separate the code for creating a pizza based on its type. Put the creation code to a separated class, and we have a simple factory. **This is not actually a Design Pattern but commonly used**
+```java
+public class SimplePizzaFactory {
+
+    public Pizza createPizza(String type) {
+        Pizza pizza;
+    
+        if (type.equals("cheese") pizza = new CheesePizza();
+        else if (type.equals("geekl") pizza = new GeekPizza();
+        else if (type.equals("cheese") pizza = new CheesePizza();
+        else if (type.equals("clam") pizza = new ClamPizza();
+
+        return pizza; 
+    }
+}
+```
+
+- The code for the PizzaStore class would look like:
+
+```java
+public class PizzaStore {
+    SimplePizzaFactory factory;
+    public PizzaStore(SimplePizzaFactory factory) {
+        this.factory = factory;
+    }
+    public Pizza orderPizza(String type) {
+        Pizza pizza;
+        
+        pizza = factory.createPizza(type);
+        pizza.perpare();
+        pizza.bake();
+        pizze,cut();
+        pizza.box();
+        
+        return pizza;
+    }
+    
+}
+```
+- The class diagram looks like:
+
+```mermaid
+classDiagram
+
+
+
+    SimplePizzaFactory *-- PizzaStore
+    class PizzaStore{
+        -SimplePizzaFactory factory
+      +orderPizza()
+    }
+
+    class Pizza{
+      +prepare()
+      +bake()
+      +cut()
+      +box()
+    }
+
+    Pizza <|-- CheesePizza
+    class CheesePizza{
+    } 
+
+    Pizza <|-- GeekPizza
+    class GeekPizza{
+    }
+
+    Pizza <|-- PeperoniPizza
+    class PeperoniPizza{
+    }
+
+    Pizza <-- SimplePizzaFactory
+    class SimplePizzaFactory{
+        -Pizza factory
+      +createPizza()
+    }
+
+    class SimplePizzaFactory{
+        -Pizza factory
+      +createPizza()
+    }
+
+```
 
 **Efficient approach:**
 
