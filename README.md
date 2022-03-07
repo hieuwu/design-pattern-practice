@@ -598,24 +598,6 @@ House Blend Coffee, Soy, Mocha, Whip $1.34
 - Simple Factory
 - Factory Method
 - Abstract Factory
-**Get started:** 
-
-**Naive approach:** 
-
-The class diagram looks like:
-
-**What if ..? :**
-**Another approach:**
-
-**Efficient approach:**
-
-- Our final result:
-
-
-**Conclusion:**
-- **The Factory Pattern** 
-
-# Builder Pattern:
 **Get started:** Write a program to support a pizza shop make their order process mroe smooth. This program supports creating many types of Pizza and be able to customized based on branches.
 
 
@@ -739,6 +721,80 @@ classDiagram
     }
 
 ```
+- **Problem occurs:**
+- When we need to fanchise our PizzaStore to many places with many different types of Pizza. For example. New York style pizza, Chicago style Pizza. Now we need to build a framework to create the right type of pizza and also keep our process smooth. Because our Pizza Store is already stable.
+- A naive approach is that we can create factory object for each fanchise. For example: NYPizzaFactory, ChicagoPizzaFactory and whenever we need, just `new NYPizzaFactory()`
+
+**Better approach** 
+- Make our PizzaStore class and the `createPizza` method  `abstract` as well. Because our ordering process is stable so we just keep it as usual. If you want every fanchise has the same process, make it `final`.
+- Implement orderPizze method 
+- Create other franchise pizza factory by subclass from PizzaStore, and override the createPizza method. Because our createrPizze is abstract, we force all concreate class override it and let subclass decide what type of pizza they create.
+The code:
+```java
+public abstract class PizzaStore {
+    public Pizza orderPizza(String type) {
+        Pizza pizza;
+        
+        pizza = factory.createPizza(type);
+        pizza.perpare();
+        pizza.bake();
+        pizze,cut();
+        pizza.box();
+        
+        return pizza;
+    }
+    
+    abstract Pizza createPizza(String type);
+    
+}
+```
+
+- Class diagram for franchise would look like:
+
+```mermaid
+classDiagram
+    class PizzaStore{
+      +createPizza()
+      +orderPizza()
+    }
+
+    PizzaStore <|-- NewYorkStylePizzaStore
+    class NewYorkStylePizzaStore{
+      +createPizza()
+    }
+
+    PizzaStore <|-- ChicagoStylePizzaStore
+    class ChicagoStylePizzaStore{
+      +createPizza()
+    }
+```
+- In each subclass of PizzaStore, let's say ChicagoStylePizzaStore, the `createPizze` method would look like:
+
+```java
+public class ChicagoStylePizzaStore extends PizzaStore {
+  Pizza createPizza(String item) {
+    if (item.equals(“cheese”)) {
+      return new NYStyleCheesePizza();
+    } else if (item.equals(“veggie”)) {
+      return new NYStyleVeggiePizza();
+    } else if (item.equals(“clam”)) {
+      return new NYStyleClamPizza();
+    } else if (item.equals(“pepperoni”)) {
+      return new NYStylePepperoniPizza();
+    } else return null;
+  }
+}
+```
+**Efficient approach:**
+
+- Our final result:
+
+
+**Conclusion:**
+- **The Factory Pattern** 
+
+# Builder Pattern:
+**Get started:** 
 
 **Efficient approach:**
 
