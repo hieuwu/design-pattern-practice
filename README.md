@@ -1,6 +1,15 @@
 # design-pattern-practice
 Practice notes for problems and solutions learned from Head First Design Pattern book
+*******
+Tables of contents  
+ 1. [Strategy Pattern](#strategypattern)
+ 2. [Observer Pattern](#observerpattern)
+ 3. [Decorator Pattern](#decoratorpattern)
+ 4. [Factory Pattern](#factorypattern)
 
+*******
+
+<div id='strategypattern'/> 
 
 # Strategy Pattern:
 
@@ -161,6 +170,8 @@ classDiagram
 **Conclusion:**
 - **The Strategy Pattern** defines a family of algorithms,encapsulates each one, and makes them interchangeable.Strategy lets the algorithm vary independently from clients that use it
 
+<div id='observerpattern'/> 
+
 # Observer Pattern:
 **Get started:** Given that we need to write a Weather monitor application. In this application, we have to get data from a provider. The important thing is that, we need to notify to all users whenver the forecase measurement data is updated. And also we need to display it with in multiple forms.
 
@@ -320,6 +331,8 @@ classDiagram
 ```
 **Conclusion:**
 - **The Observer Pattern** defines a one-to-many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically
+
+<div id='decoratorpattern'/>
 
 # Decorator Pattern:
 **Get started:** Write a program to for a coffee shop to create order with many beverages, of course, many toppings and other properties are added onto each beverage.
@@ -594,10 +607,14 @@ Espresso $1.99
 Dark Roast Coffee, Mocha, Mocha, Whip $1.49
 House Blend Coffee, Soy, Mocha, Whip $1.34
 ```
+
+<div id='factorypattern'/>
+
 # Factory Pattern:
 - Simple Factory
 - Factory Method
 - Abstract Factory
+
 **Get started:** Write a program to support a pizza shop make their order process mroe smooth. This program supports creating many types of Pizza and be able to customized based on branches.
 
 
