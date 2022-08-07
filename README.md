@@ -802,13 +802,15 @@ public class ChicagoStylePizzaStore extends PizzaStore {
   }
 }
 ```
-**Efficient approach:**
-
-- Our final result:
+The `createPizza` method above is called Factory method. Which is:
+- Abstract so that the subclass is counted to handle object creation
+- Returns data type used within methods declare in the superclass
+- Isolates the code in superclass from knowing what kind of object is actually created
 
 
 **Conclusion:**
-- **The Factory Pattern** 
+- **The Factory Method Pattern**: dfines an interface for creating object but let subclass decide which class to instantiate.
+
 
 # Builder Pattern:
 **Get started:** 
