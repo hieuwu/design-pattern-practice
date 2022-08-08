@@ -810,9 +810,9 @@ The `createPizza` method above is called Factory method. Which is:
 - **Dependency Inversion Principle**: depends uppon abstractions. Do not depend on concrete classes
 
 > **Note**: Guildline to follow Dependency Inversion Principle:
-- No variable should hold a reference to a concrete class (If use `new`, which means holding a reference to concrete class. Should delegate to a factory)
-- No class should derive from concrete class (If we derive from concrete class, we depends on it. Only depends on abstractions like abstract class or interface)
-- No method should override implemented method of base class (If we override implemented method, the base class wasn't really an abstraction anymore. Those implemented methods are meant to be shared by all subclasses)
+> - No variable should hold a reference to a concrete class (If use `new`, which means holding a reference to concrete class. Should delegate to a factory)
+> - No class should derive from concrete class (If we derive from concrete class, we depends on it. Only depends on abstractions like abstract class or interface)
+> - No method should override implemented method of base class (If we override implemented method, the base class wasn't really an abstraction anymore. Those implemented methods are meant to be shared by all subclasses)
 
 # Builder Pattern:
 **Get started:** 
