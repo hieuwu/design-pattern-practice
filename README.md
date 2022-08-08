@@ -698,9 +698,6 @@ public class PizzaStore {
 
 ```mermaid
 classDiagram
-
-
-
     SimplePizzaFactory *-- PizzaStore
     class PizzaStore{
         -SimplePizzaFactory factory
@@ -738,7 +735,7 @@ classDiagram
     }
 
 ```
-- **Problem occurs:**
+**Problem occurs:**
 - When we need to fanchise our PizzaStore to many places with many different types of Pizza. For example. New York style pizza, Chicago style Pizza. Now we need to build a framework to create the right type of pizza and also keep our process smooth. Because our Pizza Store is already stable.
 - A naive approach is that we can create factory object for each fanchise. For example: NYPizzaFactory, ChicagoPizzaFactory and whenever we need, just `new NYPizzaFactory()`
 
@@ -809,8 +806,13 @@ The `createPizza` method above is called Factory method. Which is:
 
 
 **Conclusion:**
-- **The Factory Method Pattern**: dfines an interface for creating object but let subclass decide which class to instantiate.
+- **The Factory Method Pattern**: defines an interface for creating object but let subclass decide which class to instantiate.
+- **Dependency Inversion Principle**: depends uppon abstractions. Do not depend on concrete classes
 
+> **Note**: Guildline to follow Dependency Inversion Principle:
+- No variable should hold a reference to a concrete class (If use `new`, which means holding a reference to concrete class. Should delegate to a factory)
+- No class should derive from concrete class (If we derive from concrete class, we depends on it. Only depends on abstractions like abstract class or interface)
+- No method should override implemented method of base class (If we override implemented method, the base class wasn't really an abstraction anymore. Those implemented methods are meant to be shared by all subclasses)
 
 # Builder Pattern:
 **Get started:** 
