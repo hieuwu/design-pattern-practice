@@ -804,6 +804,7 @@ The `createPizza` method above is called Factory method. Which is:
 - Returns data type used within methods declare in the superclass
 - Isolates the code in superclass from knowing what kind of object is actually created
 
+**Efficient approach:** 
 
 **Conclusion:**
 - **The Factory Method Pattern**: defines an interface for creating object but let subclass decide which class to instantiate.
