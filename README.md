@@ -804,7 +804,110 @@ The `createPizza` method above is called Factory method. Which is:
 - Returns data type used within methods declare in the superclass
 - Isolates the code in superclass from knowing what kind of object is actually created
 
-**Efficient approach:** 
+**Efficient approach:** Currently, our Pizza Store is fine. However, it is very hard to keep the ingredients of the pizza in every store at different regions the same. For example, the New Your store would use another ingredients for the tomato sauce, the Chicago store also do so. This is when we need to do something to make our ingredients set more flexible across region.
+Because of the fact that New York would use one set of ingredients, Chicago would use another. It's time we need to create families of ingredients.
+First, we need to create an IngredientsFactory to create each set of ingredients. If our stores in every region have the same behavior, consider using an `abstract` class. In this case, an `interface` is good enough. Our shared factory would look like:
+
+```java
+public interface PizzaIngredientFactory {
+    public Dough createDough();
+    public Sauce createSauce();
+    public Cheese createCheese();
+    public Veggies[] createVeggies();
+    public Pepperoni createPepperoni();
+    public Clams createClam();
+}
+```
+Next, we need to:
+- Build factory for each region
+- Implement set of ingredients class to be used with the factory
+- Hook the new factories to current Pizza Store 
+
+Let's take the New York style for an example:
+```java
+public class NYPizzaIngredientFactory implements PizzaIngredientFactory {
+    public Dough createDough() {
+        return new ThinCrustDough();
+    }
+    public Sauce createSauce() {
+        return new MarinaraSauce();
+    }
+    public Cheese createCheese() {
+        return new ReggianoCheese();
+    }
+    public Veggies[] createVeggies() {
+        Veggies veggies[] = {
+            new Garlic(),
+            new Onion(),
+            new Mushroom(),
+            new RedPepper()
+        };
+        return veggies;
+    }
+    public Pepperoni createPepperoni() {
+        return new SlicedPepperoni();
+    }
+    public Clams createClam() {
+        return new FreshClams();
+    }
+}
+```
+Remember that all the classed that being created should be the concrete class of the return type :)
+After that, our Pizza class becomes:
+
+```java
+public abstract class Pizza {
+    String name;
+    Dough dough;
+    Sauce sauce;
+    Veggies veggies[];
+    Cheese cheese;
+    Pepperoni pepperoni;
+    Clams clam;
+    abstract void prepare();
+    void bake() {
+        System.out.println(“Bake for 25 minutes at 350”);
+    }
+    void cut() {
+        System.out.println(“Cutting the pizza into diagonal slices”);
+    }
+    void box() {
+        System.out.println(“Place pizza in official PizzaStore box”);
+    }
+}
+```
+Now that we have an abstraction of Pizza. So clean! Let's take a look on it's concrete classes:
+```java
+public class CheesePizza extends Pizza {
+    PizzaIngredientFactory ingredientFactory;
+    public CheesePizza(PizzaIngredientFactory ingredientFactory) {
+        this.ingredientFactory = ingredientFactory;
+    }
+    void prepare() {
+        System.out.println(“Preparing“ + name);
+        dough = ingredientFactory.createDough();
+        sauce = ingredientFactory.createSauce();
+        cheese = ingredientFactory.createCheese();
+    }
+}
+
+
+public class ClamPizza extends Pizza {
+    PizzaIngredientFactory ingredientFactory;
+    public ClamPizza(PizzaIngredientFactory ingredientFactory) {
+        this.ingredientFactory = ingredientFactory;
+    }
+    void prepare() {
+        System.out.println(“Preparing“ + name);
+        dough = ingredientFactory.createDough();
+        sauce = ingredientFactory.createSauce();
+        cheese = ingredientFactory.createCheese();
+        clam = ingredientFactory.createClam();
+    }
+}
+
+```
+
 
 **Conclusion:**
 - **The Factory Method Pattern**: defines an interface for creating object but let subclass decide which class to instantiate.
