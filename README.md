@@ -6,9 +6,10 @@ Tables of contents
  2. [Observer Pattern](#observerpattern)
  3. [Decorator Pattern](#decoratorpattern)
  4. [Factory Pattern](#factorypattern)
+ 5. [Singleton Pattern](#singletonpattern)
 
 *******
-
+[Jumpt to end](#theend)
 <div id='strategypattern'/> 
 
 # Strategy Pattern:
@@ -918,6 +919,8 @@ public class ClamPizza extends Pizza {
 > - No class should derive from concrete class (If we derive from concrete class, we depends on it. Only depends on abstractions like abstract class or interface)
 > - No method should override implemented method of base class (If we override implemented method, the base class wasn't really an abstraction anymore. Those implemented methods are meant to be shared by all subclasses)
 
+<div id='singletonpattern'/> 
+
 # Builder Pattern:
 **Get started:** 
 
@@ -929,6 +932,6 @@ public class ClamPizza extends Pizza {
 **Conclusion:**
 - **The Builder Pattern** 
 
-
+<div id='theend'/> 
 
 
