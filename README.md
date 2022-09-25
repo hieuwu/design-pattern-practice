@@ -981,7 +981,7 @@ public class Singleton {
 ```
 > **Note**: The `synchronized` is only relevent by the time we initlaized the object. When we already have the object, we do not need to synchronize this method. Looks like synchronized is unnedded overhead
 
-**Efficient approach**: We have to options to consider to make sure our Singleton object works properly for every cases including multithreading one.
+**Efficient approach**: We have 3 options to consider to make sure our Singleton object works properly for every cases including multithreading one.
 1. Keep the `synchronized` and leave the current one as is if the object initalization is not expensive to your application
 2. Move to an eagerly created instance rather than a lazily one. 
 Using this approach, we rely on the JVM to create the unique instance of the Singleton when the class is loaded. The JVM guarantees that the instance will be created before any thread accesses the static uniqueInstance variable
@@ -994,6 +994,24 @@ public class Singleton {
     }
 }
 ```
+3. Use “double-checked locking” to reduce the use of synchronization in getInstance()
+```java
+public class Singleton {
+    private volatile static Singleton uniqueInstance;
+    private Singleton() {}
+    public static Singleton getInstance() {
+        if (uniqueInstance == null) {
+            synchronized(Singleton.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new Singleton();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
+}
+```
+> **Note**: The volatile keyword ensures that multiple threads handle the uniqueInstance variable correctly when it is being initialized to the Singleton instance
 
 **Conclusion:**
 - **The Singleton Pattern** : ensures a class has only one instance, and provides a global point of access to it
