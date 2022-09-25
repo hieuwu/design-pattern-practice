@@ -1,5 +1,8 @@
 # design-pattern-practice
 Practice notes for problems and solutions learned from Head First Design Pattern book
+
+<div id='top'/> 
+
 *******
 Tables of contents  
  1. [Strategy Pattern](#strategypattern)
@@ -171,6 +174,8 @@ classDiagram
 **Conclusion:**
 - **The Strategy Pattern** defines a family of algorithms,encapsulates each one, and makes them interchangeable.Strategy lets the algorithm vary independently from clients that use it
 
+[Back to top](#top)
+
 <div id='observerpattern'/> 
 
 # Observer Pattern:
@@ -332,6 +337,8 @@ classDiagram
 ```
 **Conclusion:**
 - **The Observer Pattern** defines a one-to-many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically
+
+[Back to top](#top)
 
 <div id='decoratorpattern'/>
 
@@ -609,6 +616,8 @@ Dark Roast Coffee, Mocha, Mocha, Whip $1.49
 House Blend Coffee, Soy, Mocha, Whip $1.34
 ```
 
+[Back to top](#top)
+
 <div id='factorypattern'/>
 
 # Factory Pattern:
@@ -653,7 +662,6 @@ Pizza orderPizza(String type){
     return pizza;
 }
 ```
-
 
 **Another approach:**
 - We can improve the code inside `orderPizza` function. AS you can see, we can separate the code for creating a pizza based on its type. Put the creation code to a separated class, and we have a simple factory. **This is not actually a Design Pattern but commonly used**
@@ -919,18 +927,79 @@ public class ClamPizza extends Pizza {
 > - No class should derive from concrete class (If we derive from concrete class, we depends on it. Only depends on abstractions like abstract class or interface)
 > - No method should override implemented method of base class (If we override implemented method, the base class wasn't really an abstraction anymore. Those implemented methods are meant to be shared by all subclasses)
 
+[Back to top](#top)
+
 <div id='singletonpattern'/> 
 
-# Builder Pattern:
-**Get started:** 
+# Singleton Pattern:
+**Get started:** We need to create an object to be used everywhere. Make sure this object is one-of-a-kind.
 
-**Efficient approach:**
+**Naive approach:** Create a class as the diagram below. Because we only need our object is only initialized when we need it, then we check null before returning initialize it. So simple:
+```mermaid
+classDiagram
+    class Singleton{
+      - uniqueInstance: Singleton
+      +getInstance(): Singleton
+    }
+```
 
-- Our final result:
+```java
+public class Singleton {
+    private static Singleton uniqueInstance;
+    // other useful instance variables here
+    private Singleton() {}
+    public static Singleton getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Singleton();
+        }
+        return uniqueInstance;
+    }
+    // other useful methods here
+}
+```
+**Problem occurs:**
+- What if we have more than one place use the singleton at the same time? More than one thread access to properties of the Singleton.
+- How do we handle this case? Some threads would have some conditions for the properties from Singleton to make the program run properly. Value of a property might be modified by a process while another is about to use the previous value.
+- If we do not handle this case for multi threads, it would lead to the situation where one thread always run wrongly and never give us the expected behavior
 
+**Better approach:** We need to do something to make sure that 'if a thread is about to access singleton, every other threads that access before should done their job'.
+We can do this by using `synchronized` keyword in Java:
+
+```java
+public class Singleton {
+    private static Singleton uniqueInstance;
+    // other useful instance variables here
+    private Singleton() {}
+    public static synchronized Singleton getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Singleton();
+        }
+        return uniqueInstance;
+    }
+    // other useful methods here
+}
+```
+> **Note**: The `synchronized` is only relevent by the time we initlaized the object. When we already have the object, we do not need to synchronize this method. Looks like synchronized is unnedded overhead
+
+**Efficient approach**: We have to options to consider to make sure our Singleton object works properly for every cases including multithreading one.
+1. Keep the `synchronized` and leave the current one as is if the object initalization is not expensive to your application
+2. Move to an eagerly created instance rather than a lazily one. 
+Using this approach, we rely on the JVM to create the unique instance of the Singleton when the class is loaded. The JVM guarantees that the instance will be created before any thread accesses the static uniqueInstance variable
+```java
+public class Singleton {
+    private static Singleton uniqueInstance = new Singleton();
+    private Singleton() {}
+    public static Singleton getInstance() {
+        return uniqueInstance;
+    }
+}
+```
 
 **Conclusion:**
-- **The Builder Pattern** 
+- **The Singleton Pattern** : ensures a class has only one instance, and provides a global point of access to it
+
+
+[Back to top](#top)
 
 <div id='theend'/> 
 
