@@ -10,6 +10,7 @@ Tables of contents
  3. [Decorator Pattern](#decoratorpattern)
  4. [Factory Pattern](#factorypattern)
  5. [Singleton Pattern](#singletonpattern)
+ 6. [Command Pattern](#commandpattern)
 
 *******
 [Jump to end](#theend)
@@ -1020,6 +1021,13 @@ public class Singleton {
 
 
 [Back to top](#top)
+
+<div id='commandpattern'/> 
+
+# Command Pattern:
+**Get started:** 
+
+
 
 <div id='theend'/> 
 
