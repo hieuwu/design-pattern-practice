@@ -12,7 +12,7 @@ Tables of contents
  5. [Singleton Pattern](#singletonpattern)
 
 *******
-[Jumpt to end](#theend)
+[Jump to end](#theend)
 <div id='strategypattern'/> 
 
 # Strategy Pattern:
