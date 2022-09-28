@@ -1027,8 +1027,10 @@ public class Singleton {
 # Command Pattern:
 **Get started:** 
 
+```mermaid
 flowchart LR
     Customer-- createOrder -->Waitress --takeOrder, orderUp-->Cook--makeBurger, makeDrink -->Dish
+```
 
 <div id='theend'/> 
 
