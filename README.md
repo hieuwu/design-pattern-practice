@@ -1024,7 +1024,10 @@ public class Singleton {
 <div id='commandpattern'/> 
 
 # Command Pattern:
-**Get started:** 
+**Get started:** Given that we want to build an API to support a remote control to control our smart home devices. This API would allow the remote to interact with the classes provided by the devices vendor. In general, this control will have some slots, each slot would allow you to control a device. For each device, you can perform turn on, turn off and other actions.
+The classes provided are something like:
+
+**Approach**: With OO Principles in our hands, our initial though is that we should do something to make sure that the remote don't know much about the details of how to turn on or turn off a light.
 
 ```mermaid
 flowchart LR
