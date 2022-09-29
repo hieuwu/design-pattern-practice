@@ -1038,6 +1038,7 @@ flowchart LR
 ```
 The waitress will receive order from customer, then bring it to the Cook, tell him to cook. After that, the cook will make the dishes following the list inside the order.
 Back to our case, the remote control need to create requests to `another class` to execute, and inside the execute of `another class`, we will call the exact method of each class provided from vendors.
+Let's take a look at this diagram:
 
 ```mermaid
 classDiagram
@@ -1065,6 +1066,11 @@ classDiagram
         +execute()
         +undo()
     }
+```
+In general, this is how it works:
+
+```mermaid
+    Client-- createCommandObject, setCommand -->Invoker --execute-->Receiver           
 ```
 
 <div id='theend'/> 
