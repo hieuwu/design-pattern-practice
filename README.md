@@ -1027,13 +1027,17 @@ public class Singleton {
 **Get started:** Given that we want to build an API to support a remote control to control our smart home devices. This API would allow the remote to interact with the classes provided by the devices vendor. In general, this control will have some slots, each slot would allow you to control a device. For each device, you can perform turn on, turn off and other actions.
 The classes provided are something like:
 
-**Approach**: With OO Principles in our hands, our initial though is that we should do something to make sure that the remote does not know much about the details of how to turn on or turn off a light. It should request throught another helper to make it do it.
+**Initial thought**: With OO Principles in our hands, our initial though is that we should do something to make sure that the remote does not know much about the details of how to turn on or turn off a light. It should request throught another helper to make it do it.
 We also need to avoid if statements like `if slot1 == Light then turnOff() else if slot1 == GarageDoor then scrollDown()`. This approach will lead to lot of changes when we need to add more devices. More work and more bugs.
 
+**Approach:** Alright, now we have to do some thing to make the remote coltrol requests for what it want and another helper make the work done. This is quite similar to the way we request an order in restaurant. Let's take this as an example before we jump in to the pattern.
+The order process looks like:
 ```mermaid
 flowchart LR
-    Customer-- createOrder -->Waitress --takeOrder, orderUp-->Cook--makeBurger, makeDrink -->Dish
+    Customer-- createOrder -->Waitress --takeOrder, orderUp-->Cook--makeBurger, makeDrink -->Dish             
 ```
+The waitress will receive order from customer, then bring it to the Cook, tell him to cook. After that, the cook will make the dishes following the list inside the order.
+Back to our case, the remote control need to create requests to `another class` to execute, and inside the execute of `another class`, we will call the exact method of each class provided from vendors.
 
 ```mermaid
 classDiagram
@@ -1046,8 +1050,6 @@ classDiagram
     Receiver <-- ConcreteCommand
     class Receiver{
     }
-
-
 
     Command <-- Invoker
     class Invoker{
