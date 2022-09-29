@@ -1070,7 +1070,8 @@ classDiagram
 In general, this is how it works:
 
 ```mermaid
-    Client-- createCommandObject, setCommand -->Invoker --execute-->Receiver           
+flowchart LR
+    Client-- createCommandObject, setCommand --> Invoker --execute--> Receiver           
 ```
 
 <div id='theend'/> 
