@@ -1027,7 +1027,8 @@ public class Singleton {
 **Get started:** Given that we want to build an API to support a remote control to control our smart home devices. This API would allow the remote to interact with the classes provided by the devices vendor. In general, this control will have some slots, each slot would allow you to control a device. For each device, you can perform turn on, turn off and other actions.
 The classes provided are something like:
 
-**Approach**: With OO Principles in our hands, our initial though is that we should do something to make sure that the remote don't know much about the details of how to turn on or turn off a light.
+**Approach**: With OO Principles in our hands, our initial though is that we should do something to make sure that the remote does not know much about the details of how to turn on or turn off a light. It should request throught another helper to make it do it.
+We also need to avoid if statements like `if slot1 == Light then turnOff() else if slot1 == GarageDoor then scrollDown()`. This approach will lead to lot of changes when we need to add more devices. More work and more bugs.
 
 ```mermaid
 flowchart LR
