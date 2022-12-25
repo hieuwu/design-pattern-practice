@@ -1,6 +1,9 @@
 # design-pattern-practice
 Practice notes for problems and solutions learned from Head First Design Pattern book
 
+ [![In-progress](https://img.shields.io/badge/In-progress-%23FFac45.svg?&style=for-the-badge&logo=java&logoColor=white&color=yellow)](https://github.com/)
+
+
 <div id='top'/> 
 
 *******
