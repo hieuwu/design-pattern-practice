@@ -1077,6 +1077,12 @@ flowchart LR
     Client-- createCommandObject, setCommand --> Invoker --execute--> Receiver           
 ```
 
+[Back to top](#top)
+
+<div id='adapterandfacadepattern'/> 
+# Adapter and Facade Pattern:
+
+
 <div id='theend'/> 
 
 
